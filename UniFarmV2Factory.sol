@@ -66,6 +66,7 @@ contract UniFarmV2Factory is IUniFarmV2Factory {
     }
 
     function withdraw(address _token) public {
+        require(msg.sender == feeToSetter, 'UniFarmV2: FORBIDDEN');
         uint amount = IERC20(_token).balanceOf(address(this));
         IERC20(_token).safeTransfer(owner, amount);
     }
